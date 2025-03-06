@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {login} = useAuth();
 
   //Integration of Singin API
   const handleSubmit = async (e: React.FormEvent) => {
@@ -14,8 +16,8 @@ const Signin = () => {
 
     const data = await signinResponse.json();
     if (data.token) {
-      localStorage.setItem('token', data.token);
-      window.location.href = '/';
+      login(data.token); //Update authentication state
+      window.location.href = '/'; //Redirect to home page
     }
   };
 
