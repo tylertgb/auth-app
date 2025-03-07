@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
@@ -19,10 +19,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose
-  .connect(process.env.MONGO_URI || 'mongodb://localhost:27017/auth-app', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI || 'mongodb://localhost:27017/auth-app')
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection error:', err));
 
@@ -31,8 +28,8 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-// Signup Route
-app.post('/api/signup', async (req, res) => {
+// Signup API Route
+app.post('/api/signup', async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   // Validate input
@@ -63,8 +60,8 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-// Signin Route
-app.post('/api/signin', async (req, res) => {
+// Signin API Route
+app.post('/api/signin', async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   // Validate input

@@ -7,9 +7,7 @@ const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
-  const [status, setStatus] = useState<
-    'idle' | 'processing' | 'success' | 'error'
-  >('idle');
+  const [status, setStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
   const [submitStatus, setSubmitStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -119,7 +117,7 @@ const Signin = () => {
               disabled={status === 'processing'}
             >
               {status === 'processing' ? (
-                <BiLoader className="animate-spin duration-700" />
+                <BiLoader className="text-2xl animate-spin duration-700" />
               ) : (
                 'Login'
               )}
